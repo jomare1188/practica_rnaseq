@@ -1,7 +1,7 @@
 
 mkdir -p PRATICA_RNASEQ
 cd PRATICA_RNASEQ
-scp -P 1000 jorge.munoz@bioinfo.cena.usp.br:/Storage/data1/jorge.munoz/PRACTICA_RNASEQ/data/tiny/data.zip
+scp -P 1000 jorge.munoz@bioinfo.cena.usp.br:/Storage/data1/jorge.munoz/PRACTICA_RNASEQ/data/tiny/data.zip .
 unzip data.zip
 
 
