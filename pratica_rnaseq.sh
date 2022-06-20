@@ -52,7 +52,7 @@ gunzip -c ./references/gencode.v38.transcripts.fa.gz \
 # run fastqc
 mkdir -p QC
 conda activate fastqc_env
-for file in $(ls -1 data/*.fastq.gz); do fastqc --noextract \
+for file in $(ls -1 data/*.fastq); do fastqc --noextract \
 --threads 1 --nogroup -o QC $file; done
 conda deactivate
 # run bbduk
