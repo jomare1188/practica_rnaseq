@@ -31,7 +31,7 @@ wget https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_38/gencod
 wget https://github.com/COMBINE-lab/salmon/releases/download/v1.8.0/salmon-1.8.0_linux_x86_64.tar.gz
 tar -xvzf salmon-1.8.0_linux_x86_64.tar.gz
 rm salmon-1.8.0_linux_x86_64.tar.gz
-sudo echo export PATH=$PATH:~/PRACTICA_RNASEQ_1/salmon-1.8.0_linux_x86_64/bin >> ~/.bashrc
+sudo echo export PATH=$PATH:~/salmon-1.8.0_linux_x86_64/bin >> ~/.bashrc
 source ~/.bashrc
 # create salmon index
 cd ~/PRATICA_RNASEQ
