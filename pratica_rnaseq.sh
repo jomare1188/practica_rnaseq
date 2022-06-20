@@ -29,6 +29,9 @@ do
 	parallel-fastq-dump --threads 4 --outdir ./data/ --split-files --gzip --sra-id ./prefetch/${i}.sra
 done
 # download references
+cd PRATICA_RNASEQ
+mkdir references
+cd references
 wget https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_38/gencode.v38.transcripts.fa.gz
 wget https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_38/gencode.v38.annotation.gtf.gz
 # install salmon
