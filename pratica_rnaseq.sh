@@ -5,8 +5,9 @@ scp -P 1000 jorge.munoz@bioinfo.cena.usp.br:/Storage/data1/jorge.munoz/PRACTICA_
 mkdir data
 cd data
 unzip ./../data.zip
-rm data.zip
 cd ..
+rm data.zip
+
 
 
 
