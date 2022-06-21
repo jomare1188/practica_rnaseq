@@ -1,3 +1,7 @@
+conda create -n R4.2 r-base=4.2
+conda activate R4.2
+r
+
 if (!requireNamespace("BiocManager", quietly = TRUE))
   install.packages("BiocManager")
 BiocManager::install("DESeq2")
@@ -11,7 +15,6 @@ BiocManager::install("GenomicFeatures")
 BiocManager::install("tximeta")
 BiocManager::install("ReportingTools")
 install.packages(c("pheatmap","RColorBrewer","ggplot2"))
-
 library(DESeq2)
 library(readr)
 library(AnnotationDbi)
@@ -26,7 +29,7 @@ library(RColorBrewer)
 library(ggplot2)
 library(GenomicFeatures)
 
-setwd("/home/j/PRACTICA_RNASEQ/")
+setwd("~/PRACTICA_RNASEQ")
 #Load the information about the experiment, sample names, and condition
 targets<-read.table("metadata.csv",
                     header=T,
@@ -59,21 +62,21 @@ targets
 #https://bioconductor.org/packages/3.14/bioc/vignettes/tximeta/inst/doc/tximeta.html
 
 #First load the tximeta package
-library("tximeta")
-install.packages("tximeta")
+#library("tximeta")
+#install.packages("tximeta")
 
 #Now, before loading our data, create tthe transcriptome object,
 #this will help to carry out several operations,
 #like summarizing the transcript expression levels at the gene level,
 #get functional information about the genes, and so on.
 
-makeLinkedTxome(indexDir="/home/j/PRACTICA_RNASEQ/salmon/salmon_index/",
+makeLinkedTxome(indexDir="~/PRACTICA_RNASEQ/salmon_index/",
                 source="LocalEnsembl",
                 organism="Homo sapiens",
                 release="38",
                 genome="GRCh38.p13",
-                fasta="/home/j/PRACTICA_RNASEQ/salmon/gencode.v38.transcripts.fa.gz",
-                gtf="/home/j/PRACTICA_RNASEQ/salmon/gencode.v38.annotation.gtf.gz",
+                fasta="~/PRACTICA_RNASEQ/references/gencode.v38.transcripts.fa.gz",
+                gtf="~/PRACTICA_RNASEQ/references/gencode.v38.annotation.gtf.gz",
                 write=FALSE)
 
 #Now create the tximeta object that has the salmon data, the experiment
