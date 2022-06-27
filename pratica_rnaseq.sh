@@ -8,8 +8,14 @@ unzip ./../data.zip
 cd ..
 rm data.zip
 
-
-
+# Install r
+conda create -n R4.2 r-base=4.2
+rstudio
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+BiocManager::install("DESeq2")
+BiocManager::install("tximeta")
+install.packages(c("pheatmap","viridis","ggplot2"))
 
 
 # go wd
