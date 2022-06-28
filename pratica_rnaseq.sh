@@ -1,3 +1,4 @@
+https://linuxize.com/post/how-to-install-r-on-ubuntu-20-04/
 
 mkdir -p PRATICA_RNASEQ
 cd PRATICA_RNASEQ
