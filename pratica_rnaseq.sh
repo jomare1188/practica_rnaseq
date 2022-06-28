@@ -1,13 +1,15 @@
 https://linuxize.com/post/how-to-install-r-on-ubuntu-20-04/
 
-mkdir -p PRATICA_RNASEQ
-cd PRATICA_RNASEQ
-scp -P 1000 jorge.munoz@bioinfo.cena.usp.br:/Storage/data1/jorge.munoz/PRACTICA_RNASEQ/data/tiny/data.zip .
-mkdir data
-cd data
-unzip ./../data.zip
-cd ..
-rm data.zip
+#mkdir -p PRATICA_RNASEQ
+#cd PRATICA_RNASEQ
+cd 
+scp -P 1000 jorge.munoz@bioinfo.cena.usp.br:/Storage/data1/jorge.munoz/PRACTICA_RNASEQ/PRATICA_RNASEQ.zip .
+#scp -P 1000 jorge.munoz@bioinfo.cena.usp.br:/Storage/data1/jorge.munoz/PRACTICA_RNASEQ/data/tiny/data.zip .
+#mkdir data
+#cd data
+unzip PRATICA_RNASEQ.zip
+#cd ..
+rm PRATICA_RNASEQ.zip
 
 apt update -y && apt upgrade -y
 # Install r
