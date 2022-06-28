@@ -29,7 +29,7 @@ wget https://download1.rstudio.org/desktop/bionic/amd64/rstudio-2022.02.3-492-am
 dpkg -i rstudio-2022.02.3-492-amd64.deb
 
 
-
+sudo apt install libxml2-dev libcurl4-openssl-dev libssl-dev
 
 
 #######
