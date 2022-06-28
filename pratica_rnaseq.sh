@@ -9,7 +9,6 @@ unzip ./../data.zip
 cd ..
 rm data.zip
 
-
 apt update -y && apt upgrade -y
 # Install r
 # update indices
@@ -73,16 +72,15 @@ source ~/.bashrc
 cd ~/PRATICA_RNASEQ
 salmon index -t ./references/gencode.v38.transcripts.fa.gz -i salmon_index --threads 2
 
-# create tx2gene
-gunzip -c ./references/gencode.v38.transcripts.fa.gz \
-| grep ">"| cut -f 1,2 -d '|' \
-|sed 's/|/\t/'|sed 's/>//' > tx2gene.txt
-# run fastqc
-mkdir -p QC
+
+# run fastqc1
+mkdir -p QC1
 conda activate fastqc_env
-for file in $(ls -1 data/*.fastq); do fastqc --noextract \
---threads 1 --nogroup -o QC $file; done
+for file in $(ls data/*.fastq); do fastqc --noextract \
+--threads 6 --nogroup -o QC1 $file; done
 conda deactivate
+
+
 # run bbduk
 mkdir -p bbduk
 conda activate bbduk_env
@@ -93,6 +91,14 @@ file_R2=${sample}_2.fastq
 bbduk.sh in1=./data/${file_R1} in2=./data/${file_R2} out1=./bbduk/${file_R1} out2=./bbduk/${file_R2} minlength=50 qtrim=w trimq=20
 done
 conda deactivate
+
+# run fastqc2
+mkdir -p QC2
+conda activate fastqc_env
+for file in $(ls data/*.fastq); do fastqc --noextract \
+--threads 6 --nogroup -o QC2 $file; done
+conda deactivate
+
 # run salmon
 mkdir -p Quantification
 cd Quantification
@@ -106,6 +112,7 @@ salmon quant --libType A --threads 2 --index \
 -2 ./../bbduk/${file_R2} \
 -o ${sample};
 done
+
 
 ## BLAST PARA FILTAR DATOS DEL CROMOSOMA 1
 cd data
