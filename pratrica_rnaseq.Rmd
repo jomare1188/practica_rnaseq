@@ -3,6 +3,8 @@ title: "Pratica RNAseq"
 output:
   pdf_document: default
   html_notebook: default
+  html_document:
+    df_print: paged
 ---
 ```{r setup, include=FALSE} 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
@@ -25,7 +27,6 @@ targets<-read.table("metadata.csv",
                     col.names = c("names", "condition", "cell"))
 targets$names<-as.factor(targets$names)
 targets$cell<-as.factor(targets$cell)
-targets$group <- as.factor(paste0(targets$condition, "_", targets$cell))
 ```
 
 fazer uma lista dos arquivos de quantificação criados pelo salmon. Por favor
@@ -107,13 +108,13 @@ Neste exemplo em particular, temos pelo menos (que sabemos) fontes de variação
 dds <- DESeqDataSet(gse, design = ~cell+condition)
 ```
 
-É comum que os genes no conjunto de dados não expressos em tudo, e outros para ser muito humildemente expresso, é uma boa prática para removê-los de análises adicionais
+É comum que os genes no conjunto de dados não expressos em tudo, e outros para ser muito pouco expresso, é uma boa prática para removê-los de análises adicionais
 
 ```{r}
-nrow(dds) #Number of genes pre-filtering
+nrow(dds) # Numero de genes antes da filtragem
 keep <- rowSums(counts(dds)) > 1
 dds <- dds[keep,]
-nrow(dds) #Number of genes after filtering out non-expressed genes.
+nrow(dds) #  Numero de genes depois da filtragem
 ```
 
 Verifique o efeito da normalização
@@ -135,7 +136,7 @@ nrow(dds) # Number of genes, that have counts in at least 4 samples, and the sum
 
 Agora que os dados estão no formato adequado e filtrados podemos realizar algumas análises exploratórias para verificar se os dados parecem bons
 
-Muitas das análises exploratórias requerem dados homocedastic, que nossas contagens não são. No DESeq2 a função vst e rlog, pode normalizar os dados para torná-lo mais hocedasticos . Como regra vst é melhor quando você tem mais de 30 amostras
+Muitas das análises exploratórias requerem dados homocedasticos. As que nossas contagens não são. No DESeq2 a função vst e rlog, pode normalizar os dados para torná-lo mais homcedasticos . Como regra vst é melhor quando você tem mais de 30 amostras
 
 ```{r}
 rld <- rlog(dds, blind = TRUE)
@@ -167,7 +168,7 @@ pheatmap(sampleCorMatrix,
          col=colors)
 ```
 
-Também é comum mostrar um enredo PCA das amostras, colorido com os fatores de interesse
+Também é comum mostrar o agrupamento das das amostras meiante PCA, colorido com os fatores de interesse
 
 ```{r}
 pcaData <- plotPCA(rld, intgroup = c( "condition",
@@ -181,7 +182,7 @@ ggplot(pcaData, aes(x = PC1, y = PC2, color = condition, shape = cell)) +
   coord_fixed() +
   ggtitle("PCA with RLOG data")
 ```
-Agora fazemos o análise de expressão diferencial e olhamos seu nível de expressão nas diferentes condições
+Agora fazemos o análise de expressão diferencial tendo en conta os fatores ~cell+condition
 
 ```{r}
 dds <- DESeq(dds)
