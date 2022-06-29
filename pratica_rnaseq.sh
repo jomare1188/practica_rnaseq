@@ -3,6 +3,13 @@ https://linuxize.com/post/how-to-install-r-on-ubuntu-20-04/
 #mkdir -p PRATICA_RNASEQ
 #cd PRATICA_RNASEQ
 cd 
+
+##### DOWNLOAD RAW DATA ###########
+scp -P 1000 jorge.munoz@bioinfo.cena.usp.br:/Storage/data1/jorge.munoz/PRACTICA_RNASEQ/data/tiny/data.zip ~/PRATICA_RNASEQ/
+unzip data.zip -d data
+rm data.zip
+###################################
+
 scp -P 1000 jorge.munoz@bioinfo.cena.usp.br:/Storage/data1/jorge.munoz/PRACTICA_RNASEQ/PRATICA_RNASEQ.zip .
 #scp -P 1000 jorge.munoz@bioinfo.cena.usp.br:/Storage/data1/jorge.munoz/PRACTICA_RNASEQ/data/tiny/data.zip .
 #mkdir data
@@ -107,7 +114,7 @@ cd Quantification
 for sample in $(cut -f1 -d"," ./../metadata.csv | grep SRR); do \
 file_R1=${sample}_1.fastq; \
 file_R2=${sample}_2.fastq; \
-salmon quant --libType A --threads 2 --index \
+salmon quant --libType A --threads 4 --index \
 ./../salmon_index/ \
 --validateMappings --seqBias --posBias --softclip \
 -1 ./../bbduk/${file_R1} \
